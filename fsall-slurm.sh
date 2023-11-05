@@ -14,12 +14,14 @@
 
 # LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
 
-python -u -c "importPyHipp as pyh; \
+python -u -c "import PyHipp as pyh; \
 import DataProcessingTools as DPT; \
+import time; \
 lfall = DPT.objects.processDirs(dirs=None, exclude=['*eye*', '*mountains*'], objtype=pyh.FreqSpectrum, saveLevel=1); \
 lfall.save(); \
 hfall = DPT.objects.processDirs(dirs=None, exclude=['*eye*', '*mountains*'], objtype=pyh.FreqSpectrum, loadHighPass=True, pointsPerWindow=3000, saveLevel=1); \
-hfall.save();"
+hfall.save();
+print(time.localtime());"
 
 aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:512391934602:awsnotify --message "FSJobDone"
 
